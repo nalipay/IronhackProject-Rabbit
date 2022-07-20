@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.show {
+  display: block;
+  transition: 800ms;
+  opacity: 1;
+}
+
+.show-active {
+  transform: translate(100px) scale(0) rotate(180deg);
+  opacity: 0;
+}
