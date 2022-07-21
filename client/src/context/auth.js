@@ -20,7 +20,7 @@ function AuthProviderWrapper(props) {
 		if (storedToken) {
 			// if yes -> send it to the server to verify
 			return axios.get(
-				'/api/auth/verify',
+				'http://localhost:5005/api/auth/verify',
 				{ headers: { Authorization: `Bearer ${storedToken}` } }
 			)
 				.then(response => {

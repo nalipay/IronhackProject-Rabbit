@@ -28,22 +28,34 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+.popup-box {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+.box-channel {
+  position: relative;
+  width: 50%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  border: 1px solid #999;
+  overflow: auto;
 }
 
-.show {
-  display: block;
-  transition: 800ms;
-  opacity: 1;
-}
-
-.show-active {
-  transform: translate(100px) scale(0) rotate(180deg);
-  opacity: 0;
+.close-icon {
+  cursor: pointer;
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+  font-size: 25px;
 }

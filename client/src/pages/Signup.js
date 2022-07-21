@@ -15,7 +15,6 @@ export default function Signup() {
 		const requestBody = { username, password, }
 		axios.post('http://localhost:5005/api/auth/signup', requestBody)
 			.then(response => {
-				// redirect to login
 				navigate('/login')
 			})
 			.catch(err => {

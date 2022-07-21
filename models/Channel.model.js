@@ -1,10 +1,11 @@
 const {Schema, model} = require("mongoose")
 
-const roomSchema = new Schema(
+const channelSchema = new Schema(
     {
         name: {
             type: String,
-            unique: true
+            unique: true,
+            lowercase: true
         },
         posts: {
             type: Schema.Types.ObjectId,
@@ -14,6 +15,6 @@ const roomSchema = new Schema(
 )
 
 
-const Room = model("Room", roomSchema);
+const Channel = model("Channel", channelSchema);
 
-module.exports = Room;
+module.exports = Channel;

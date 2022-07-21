@@ -10,13 +10,13 @@ const postSchema = new Schema(
         votes: {
             type: Number
         },
-        comment: {
+        fileURL: {
+            type: String
+        },
+        description: {
             type: String
 
         },
-        image: {
-            type: String
-        }
     },
     {
         timestamps: true
