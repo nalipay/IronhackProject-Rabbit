@@ -17,6 +17,7 @@ export default function CreatePost(props) {
 		const requestBody = { title, file, description }
 		axios.post('http://localhost:5005/api/posts', requestBody)
 			.then(response => {
+                props.handleClose()
 				console.log(response.data)
 			})
 			.catch(err => {
