@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
-import UserChannel from './pages/Channel'
+import Channel from './pages/Channel'
 import Navbar from './components/Navbar'
 // import LoginForm from './components/Login'
 
@@ -22,7 +22,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/channel' element={<UserChannel />} />
+        <Route path='/channel/:name' element={<Channel />} />
       </Routes>
     </>
     

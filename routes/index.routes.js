@@ -2,12 +2,23 @@ const router = require("express").Router();
 const CreateChannel = require("../models/Channel.model")
 const CreatePost = require("../models/Post.model")
 
+const fileUploader = require("../config/cloudinary.config");
+
 router.get("/", (req, res, next) => {
   res.json("All good in here");
 })
 
 // You put the next routes here 👇
 // example: router.use("/auth", authRoutes)
+
+router.post("/upload", fileUploader.single("fileURL"), (req, res, next) => {
+ 
+  // Get the URL of the uploaded file and send it as a response.
+  // 'secure_url' can be any name, just make sure you remember to use the same when accessing it on the frontend
+  
+  res.json({ secure_url: req.file.path });
+});
+
 
 router.post("/channels", (req, res, next) => {
   const {name} = req.body
@@ -38,14 +49,14 @@ router.post("/channels", (req, res, next) => {
 })
 
 router.post("/posts", (req, res, next) => {
-  const {title, file, description} = req.body
+  const {title, file, description, creator} = req.body
 
   if (title === '' && file === '' && description === '') {
 		res.status(400).json({ message: 'Provide a title, file or description' })
 		return
 	}
 
-  return CreatePost.create({title, file, description})
+  return CreatePost.create({title, file, description, creator})
     .then(createdPost => {
       res.json(createdPost)
     })

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useContext } from 'react'
 import { useState } from "react";
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/auth'
 
 
 export default function CreatePost(props) {
@@ -10,11 +11,14 @@ export default function CreatePost(props) {
     const [description, setDescription] = useState()
     const [errorMessage, setErrorMessage] = useState("")
 
+    const { user } = useContext(AuthContext)
+
     const navigate = useNavigate()
 
     const handleSubmit = event => {
 		event.preventDefault()
-		const requestBody = { title, file, description }
+		const requestBody = { title, file, description, creator: user._id }
+        console.log(requestBody)
 		axios.post('http://localhost:5005/api/posts', requestBody)
 			.then(response => {
                 props.handleClose()
