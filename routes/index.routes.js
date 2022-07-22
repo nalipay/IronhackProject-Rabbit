@@ -12,10 +12,8 @@ router.get("/", (req, res, next) => {
 // example: router.use("/auth", authRoutes)
 
 router.post("/upload", fileUploader.single("fileURL"), (req, res, next) => {
+  //console.log(req.file)
  
-  // Get the URL of the uploaded file and send it as a response.
-  // 'secure_url' can be any name, just make sure you remember to use the same when accessing it on the frontend
-  
   res.json({ secure_url: req.file.path });
 });
 
@@ -42,21 +40,21 @@ router.post("/channels", (req, res, next) => {
 					res.status(201).json({ channel: channel })
 				})
 				.catch(err => {
-					console.log(err)
+					//console.log(err)
 					res.status(500).json({ message: 'Internal Server Error' })
 				})
 		})   
 })
 
 router.post("/posts", (req, res, next) => {
-  const {title, file, description, creator} = req.body
+  const {title, fileURL, description, creator} = req.body
 
-  if (title === '' && file === '' && description === '') {
+  if (title === '' && fileURL === '' && description === '') {
 		res.status(400).json({ message: 'Provide a title, file or description' })
 		return
 	}
 
-  return CreatePost.create({title, file, description, creator})
+  return CreatePost.create({title, fileURL, description, creator})
     .then(createdPost => {
       res.json(createdPost)
     })

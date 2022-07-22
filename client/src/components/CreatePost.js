@@ -7,7 +7,7 @@ import { AuthContext } from '../context/auth'
 
 export default function CreatePost(props) {
     const [title, setTitle] = useState("")
-    const [file, setFile] = useState()
+    const [fileURL, setFileURL] = useState("")
     const [description, setDescription] = useState()
     const [errorMessage, setErrorMessage] = useState("")
 
@@ -15,17 +15,32 @@ export default function CreatePost(props) {
 
     const navigate = useNavigate()
 
+    const handleFileUpload = e => {
+     
+        const uploadData = new FormData();
+     
+        uploadData.append("fileURL", e.target.files[0]);
+     
+        axios
+          .post('/api/upload', uploadData)
+          .then(response => {
+           //console.log(response)
+            setFileURL(response.data.secure_url);
+        
+          })
+          .catch(err => console.log("Error while uploading the file: ", err));
+      };
+
     const handleSubmit = event => {
 		event.preventDefault()
-		const requestBody = { title, file, description, creator: user._id }
-        console.log(requestBody)
+		const requestBody = { title, fileURL, description, creator: user._id }
+        //console.log(requestBody)
 		axios.post('http://localhost:5005/api/posts', requestBody)
 			.then(response => {
                 props.handleClose()
-				console.log(response.data)
+				//console.log(response.data)
 			})
 			.catch(err => {
-                console.log(err)
 				const errorDescription = err.response.data.message
 				setErrorMessage(errorDescription)
 			})
@@ -43,9 +58,9 @@ export default function CreatePost(props) {
                         <input type="text" value={title} onChange={handleTitle} />
                         <br />
                         <label htmlFor="file">File Upload: </label>
-                        <input filename={file} onChange={e => setFile(e.target.files[0])} type="file" accept="image/*" />
+                        <input onChange={(e) => handleFileUpload(e)} type="file" />
                         <br />
-                        <label htmlFor="file">Description: </label>
+                        <label htmlFor="description">Description: </label>
                         <input onChange={e => setDescription(e.target.value)} type="text" />
                         <br />
                         <button type="submit">Add new post</button>
