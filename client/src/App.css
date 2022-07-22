@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap');
+
 .App {
   text-align: center;
 }
@@ -30,6 +32,47 @@
 
 
 
+
+h1 {
+  font-family: 'Roboto Mono', monospace;
+}
+.logo-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 40px;
+  margin-left: 30px;
+}
+.logo-header img {
+  width: 80px;
+  height: auto;
+}
+.sideNav {
+  border-left: 2px solid black;
+  height: 100%; 
+  width: 20vw;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  color: black;
+}
+.navLinks {
+  margin-top: 50px;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 600;
+  font-size: 16px;
+  color: black;
+  display: block;
+  line-height: 2.8;
+}
+.navLinks :visited {
+  color: black;
+}
 .popup-box {
   position: fixed;
   background: #00000050;

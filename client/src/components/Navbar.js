@@ -7,33 +7,37 @@ import CreateChannel from './CreateChannel'
 function Navbar() {
 	const [isOpenChannel, setIsOpenChannel] = useState(false)
 
-
 	const popupChannel = () => {
 		setIsOpenChannel(!isOpenChannel);
 	  }
 
 	return (
-
-		<nav>
-            <div>
-			<ul className='navBar'>
-                <img src={ImgLogo} height='80' alt='homepic' />
-				<h2>Rabbit</h2>
-				<li>
-                    <Link to='/signup'>Signup</Link>
-					<br />
-					<Link to='/login'>Login</Link>
-				</li>
-			</ul>
-			<div>
-				<Link to={popupChannel} onClick={popupChannel}>Create new channel</Link>
-				{isOpenChannel && <CreateChannel 
-				handleClose={popupChannel}
-				/>}
+	
+		<div>
+			<div className='logo-header'>
+				<img src={ImgLogo} height='80' alt='homepic' />
+				<h1>rabbit</h1>
 			</div>
+			<nav>
+				<div className='sideNav'>
+					<ul>
+						<li className='navLinks'>
+							<Link to='/signup' style={{ textDecoration: 'none' }}>SIGNUP</Link>
+							<br />
+							<Link to='/login' style={{ textDecoration: 'none' }}>LOGIN</Link>
+							<br />
+							<Link to={popupChannel} onClick={popupChannel} style={{ textDecoration: 'none' }}>CREATE NEW CHANNEL</Link>
+								{isOpenChannel && <CreateChannel 
+								handleClose={popupChannel}
+							/>}
+						</li>
+					</ul>
 			
+			
+				</div>
+        	</nav>
 		</div>
-        </nav>
+		
 	)
 }
 

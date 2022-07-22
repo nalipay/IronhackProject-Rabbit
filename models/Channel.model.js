@@ -8,7 +8,7 @@ const channelSchema = new Schema(
             lowercase: true
         },
         posts: {
-            type: Schema.Types.ObjectId,
+            type: [Schema.Types.ObjectId],
             ref: "Post"
           },
     }

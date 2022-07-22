@@ -8,13 +8,15 @@ import axios from 'axios'
 export default function Channel() {
 	const params = useParams()
 	const name = params.name
-	const [post, setPost] = useState([])
+
+
+ 	const [posts, setPosts] = useState([])
 
 	useEffect(() => {
 		axios.get(`http://localhost:5005/api/channel/${name}`)
 			.then(response => {
-				console.log(response)
-				setPost(response.data)
+				// console.log(response)
+				setPosts(response.data.posts)
 			})
 		.catch(err => console.log(err))
 	}, [])
@@ -28,12 +30,18 @@ export default function Channel() {
 		<div>
 			<div>
 				<Link to={popupPost} onClick={popupPost}>Create new post</Link>
-				{isOpenPost && <CreatePost handleClose={popupPost} />}
+				{isOpenPost && <CreatePost handleClose={popupPost} name={name}/>}
 			</div>
-			<div className='visiblePost'>
+			<div>
+				<h2>{name}</h2>
+				{posts}
+			</div>
+
+
+			{/* <div className='visiblePost'>
 				<h3> { post.title } </h3>
 				<p> { post.description } </p>
-			</div>
+			</div> */}
 		</div>
 			
 		)

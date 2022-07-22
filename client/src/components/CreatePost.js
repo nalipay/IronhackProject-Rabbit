@@ -10,8 +10,8 @@ export default function CreatePost(props) {
     const [fileURL, setFileURL] = useState("")
     const [description, setDescription] = useState()
     const [errorMessage, setErrorMessage] = useState("")
-
     const { user } = useContext(AuthContext)
+    // console.log(props.name)
 
     const navigate = useNavigate()
 
@@ -33,8 +33,8 @@ export default function CreatePost(props) {
 
     const handleSubmit = event => {
 		event.preventDefault()
-		const requestBody = { title, fileURL, description, creator: user._id }
-        //console.log(requestBody)
+		const requestBody = { title, fileURL, description, creator: user._id, channel: props.name }
+        // console.log(requestBody)
 		axios.post('http://localhost:5005/api/posts', requestBody)
 			.then(response => {
                 props.handleClose()

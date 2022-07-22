@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const CreateChannel = require("../models/Channel.model")
-const CreatePost = require("../models/Post.model")
+const Channel = require("../models/Channel.model")
+const Post = require("../models/Post.model")
 
 const fileUploader = require("../config/cloudinary.config");
 
@@ -26,14 +26,14 @@ router.post("/channels", (req, res, next) => {
 		return
 	}
 
-    CreateChannel.findOne({ name })
+    Channel.findOne({ name })
     .then(foundName => {
         if (foundName) {
             res.status(400).json({ message: 'Channel already exists' })
             return
         }
 
-			return CreateChannel.create({ name })
+			return Channel.create({ name })
 				.then(createdChannel => {
 					const { name } = createdChannel
 					const channel = { name }
@@ -47,16 +47,35 @@ router.post("/channels", (req, res, next) => {
 })
 
 router.post("/posts", (req, res, next) => {
-  const {title, fileURL, description, creator} = req.body
+  const {title, fileURL, description, creator, channel} = req.body
 
   if (title === '' && fileURL === '' && description === '') {
 		res.status(400).json({ message: 'Provide a title, file or description' })
 		return
 	}
 
-  return CreatePost.create({title, fileURL, description, creator})
+  return Post.create({title, fileURL, description, creator, channel})
     .then(createdPost => {
-      res.json(createdPost)
+      //console.log(createdPost)
+      Channel.findOneAndUpdate({name:channel}, {$push: {posts:createdPost._id}})
+        .then((updatedChannel) => {
+        console.log(updatedChannel)
+        res.json(createdPost)
+      })
+    
+    })
+    
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: 'Internal Server Error' })
+    })
+})
+
+router.get("/channel/:name", (req, res, next) => {
+  const {name} = req.params
+  Channel.findOne({ name }).populate('posts')
+    .then(foundChannel => {
+      res.json(foundChannel)
     })
     .catch(err => {
       console.log(err)
