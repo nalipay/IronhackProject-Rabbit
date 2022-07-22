@@ -4,8 +4,7 @@ const postSchema = new Schema(
     {
         title: String,
         creator: {
-            type: Schema.Types.ObjectId,
-            ref: "User"
+            type: String
           },
         channel: {
             type: String    

@@ -4,11 +4,9 @@ import { Link, useParams } from 'react-router-dom'
 import CreatePost from '../components/CreatePost'
 import axios from 'axios'
 
-
 export default function Channel() {
 	const params = useParams()
 	const name = params.name
-
 
  	const [posts, setPosts] = useState([])
 
@@ -34,14 +32,19 @@ export default function Channel() {
 			</div>
 			<div>
 				<h2>{name}</h2>
-				{posts}
+	
+				{posts.map((post) => (
+					<div key={post._id}>
+						<div>
+							<h3>{post.title}</h3>
+							<p>Created by: {post.creator}</p>
+							<h4>{post.description}</h4>
+							<img src={post.fileURL} style={{width:'100px'}} alt="postImg" />
+						</div>
+						
+					</div>
+				))}
 			</div>
-
-
-			{/* <div className='visiblePost'>
-				<h3> { post.title } </h3>
-				<p> { post.description } </p>
-			</div> */}
 		</div>
 			
 		)
