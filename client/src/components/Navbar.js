@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Link } from 'react-router-dom'
 import ImgLogo from '../assets/_rabbit.png'
 import CreateChannel from './CreateChannel'
+import { AuthContext } from '../context/auth';
 
 
 function Navbar() {
@@ -10,6 +11,7 @@ function Navbar() {
 	const popupChannel = () => {
 		setIsOpenChannel(!isOpenChannel);
 	  }
+	const { isLoggedIn, logoutUser } = useContext(AuthContext);
 
 	return (
 	
@@ -22,6 +24,8 @@ function Navbar() {
 				<div className='sideNav'>
 					<ul>
 						<li className='navLinks'>
+							<Link to='/home' style={{ textDecoration: 'none' }}>HOME</Link>
+							<br />
 							<Link to='/signup' style={{ textDecoration: 'none' }}>SIGNUP</Link>
 							<br />
 							<Link to='/login' style={{ textDecoration: 'none' }}>LOGIN</Link>
@@ -30,6 +34,10 @@ function Navbar() {
 								{isOpenChannel && <CreateChannel 
 								handleClose={popupChannel}
 							/>}
+							<br />
+							{isLoggedIn && (
+								<Link onClick={logoutUser} to='/home' style={{ textDecoration: 'none' }}>LOGOUT</Link>
+							)}
 						</li>
 					</ul>
 			
