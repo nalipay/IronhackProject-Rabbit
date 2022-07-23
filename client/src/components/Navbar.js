@@ -16,12 +16,12 @@ function Navbar() {
 	return (
 	
 		<div>
-			<div className='logo-header'>
-				<img src={ImgLogo} height='80' alt='homepic' />
-				<h1>rabbit</h1>
-			</div>
 			<nav>
 				<div className='sideNav'>
+					<div className='logo-header'>
+						{/* <img src={ImgLogo} height='80' alt='homepic' /> */}
+						<h1>rabbit</h1>
+					</div>
 					<ul>
 						<li className='navLinks'>
 							<Link to='/home' style={{ textDecoration: 'none' }}>HOME</Link>

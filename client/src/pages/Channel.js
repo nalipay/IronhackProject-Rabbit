@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import CreatePost from '../components/CreatePost'
 import axios from 'axios'
 import commentImg from '../assets/comment-icon.jpeg'
+import Arrow, { DIRECTION } from 'react-arrows'
 
 export default function Channel() {
 	const params = useParams()
@@ -37,11 +38,14 @@ export default function Channel() {
 	
 				{posts.map((post) => (
 					<div className="post-wrap" key={post._id}>
-						<div className='post-info'>
+			
+						<div className='post-top'>
 							<h3>{post.title}</h3>
-							<p>Created by: {post.creator}</p>
+							<p className='post-creator'>Created by: {post.creator}</p>
+						</div>
+						<div className='post-info'>
 							<h4>{post.description}</h4>
-							<img src={post.fileURL} style={{width:'100px'}} alt="postImg" />
+							<img className='post-img' src={post.fileURL} style={{width:'100px'}} alt="postImg" />
 						</div>
 						<div className="comment-area">
 							<img src={commentImg} height='80' alt='commentImg' />
