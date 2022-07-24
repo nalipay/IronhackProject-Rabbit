@@ -7,6 +7,7 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "balloon-css": "^1.2.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.30.1",
