@@ -88,7 +88,7 @@ router.get("posts/:id", (req, res, next) => {
   const {id} = req.params
   Post.findOne({ id }).populate('posts')
     .then(foundPost => {
-      rex.json(foundPost)
+      res.json(foundPost)
     })
     .catch(err => {
       console.log(err)
