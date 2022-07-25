@@ -19,8 +19,14 @@ const postSchema = new Schema(
             type: String
 
         },
+        comments: [
+            {
+                text: String,
+                creator: String
+        },
+        ],
     },
-    {
+    { 
         timestamps: true
       }
 )

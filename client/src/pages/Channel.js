@@ -3,15 +3,15 @@ import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom'
 import CreatePost from '../components/CreatePost'
 import axios from 'axios'
-import commentImg from '../assets/comment-icon.jpeg'
+//import commentImg from '../assets/comment-icon.jpeg'
 import CreateComment from '../components/CreateComment'
+import { AiOutlineMessage } from 'react-icons/ai';
 
 export default function Channel() {
 	const params = useParams()
 	const name = params.name
 
  	const [posts, setPosts] = useState([])
-	const [comment, setComments] = useState([])
 
 	const [isOpenPost, setIsOpenPost] = useState(false)
 	const popupPost = () => {
@@ -29,7 +29,8 @@ export default function Channel() {
 				setPosts(response.data.posts)
 			})
 		.catch(err => console.log(err))
-	}, [])
+	}, [name])
+
 
 		
 
@@ -46,17 +47,20 @@ export default function Channel() {
 			
 						<div className='post-top'>
 							<h3>{post.title}</h3>
-							<p className='post-creator'>Created by: {post.creator}</p>
+							<p className='post-comment-creator'>Created by: {post.creator}</p>
 						</div>
 						<div className='post-info'>
 							<h4>{post.description}</h4>
 							<img className='post-img' src={post.fileURL} style={{width:'100px'}} alt="postImg" />
 						</div>
 						<div className="comment-area">
-							<img src={commentImg} alt="comment" onClick={popupComment} />
-							{isOpenComment && <CreateComment handleClose={popupComment} name />}
+							<AiOutlineMessage onClick={popupComment} />
+							{isOpenComment && <CreateComment handleClose={popupComment} postId ={post._id} />}
+							{/* {<img src={commentImg} alt="comment" onClick={popupComment} />} */}
+							
+							<div>
 
-							{/* <img src={commentImg} height='80' alt='commentImg' /> */}
+							</div>
 						</div>
 					</div>
 				))}

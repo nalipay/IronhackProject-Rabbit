@@ -71,6 +71,7 @@ router.post("/posts", (req, res, next) => {
     })
 })
 
+
 router.get("/channel/:name", (req, res, next) => {
   const {name} = req.params
   Channel.findOne({ name }).populate('posts')
@@ -82,5 +83,32 @@ router.get("/channel/:name", (req, res, next) => {
       res.status(500).json({ message: 'Internal Server Error' })
     })
 })
+
+router.get("posts/:id", (req, res, next) => {
+  const {id} = req.params
+  Post.findOne({ id }).populate('posts')
+    .then(foundPost => {
+      rex.json(foundPost)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: 'Internal Server Error' })
+    })
+})
+
+router.post("/posts/:id", (req, res, next) => {
+  const {id} = req.params
+  const {comment, creator} = req.body
+      Post.findByIdAndUpdate(id, {$push: {comments: {text:comment, creator}}}, {new: true})
+        .then((updatedPost) => {
+        res.json(updatedPost)
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).json({ message: 'Internal Server Error' })
+      })
+    
+    })
+
 
 module.exports = router;
