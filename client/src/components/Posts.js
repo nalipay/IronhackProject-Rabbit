@@ -45,7 +45,7 @@ export default function Channel({posts}) {
 						</div>
 
 						<div className='vote-container'>
-							<div className='vote-arrows'>
+							<div className='icons'>
 								<BsArrowUpSquareFill onClick={inc}/>
 								<p>{count}</p>
 								<BsArrowDownSquareFill onClick={dec}/>
@@ -56,17 +56,19 @@ export default function Channel({posts}) {
 							</div>
 						</div>
 						
-						<div className="comment-icon">
-							<AiOutlineMessage onClick={popupComment}/>
-							{isOpenComment && <CreateComment handleClose={popupComment} postId ={post._id} />}
-						</div>
-						<div>
-							{post.comments.map((comment) => (
-								<div className='comment-container' key={comment._id}>
-									<p className='post-comment-creator'>Comment created by: {comment.creator}</p>
-									<p>{comment.text}</p>
-								</div>
-							))}
+						<div className="comment-icon-container">
+                            <div className='icons'>
+                                <AiOutlineMessage onClick={popupComment}/>
+							    {isOpenComment && <CreateComment handleClose={popupComment} postId ={post._id} />}
+                            </div>
+							<div className='comment-info'>
+                                {post.comments.map((comment) => (
+                                    <div className='comment-container' key={comment._id}>
+                                        <p className='post-comment-creator'>Comment created by: {comment.creator}</p>
+                                        <p>{comment.text}</p>
+                                    </div>
+                                ))}
+                            </div> 
 						</div>
 					</div>
 				))}

@@ -24,7 +24,6 @@ h4 {
   height: auto;
 }
 .page-content {
-  margin-right: 20vw;;
   font-family: 'Roboto Mono', monospace;
 } 
 /* .topNav {
@@ -96,7 +95,7 @@ h4 {
   font-size: 25px;
 }
 .post-wrap {
-  width: 40vw;
+  width: 50vw;
   margin: 0 auto;
   margin-top: 20px;
   border-radius: 4px;
@@ -117,22 +116,28 @@ h4 {
   display: flex;
   align-items:baseline;
 }
-.comment-icon {
-  padding: 20px 30px 0px 30px;
-}
 .post-comment-creator {
   font-size: 10px;
   margin-left: 12px;
 }
-.comment-container {
+.comment-icon-container {
+  display: flex;
+  justify-content:center;
+  margin-top: 20px;
+}
+
+.comment-info {
   background-color: #e6e6e7;
   border-radius: 4px;
+  width: 40vw;
+  padding: 10px 30px;
+
 }
 .vote-container {
   display: flex;
   justify-content:center;
   align-items: center;
 }
-.vote-arrows {
+.icons {
   margin-right: 20px;
 }

@@ -27,7 +27,7 @@ export default function Channel() {
 		}, [name])
 
 		return (
-		<div className="page-content">
+		<div>
 			<div>
 				<Link to={popupPost} onClick={popupPost}>Create new post</Link>
 				{isOpenPost && <CreatePost handleClose={popupPost} name={name}/>}
