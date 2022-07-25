@@ -17,12 +17,14 @@ export default function Comment(props) {
 
     const handleSubmit = event => {
 		event.preventDefault()
-		const requestBody = { comment, creator:user.name }
+		const requestBody = { comment, creator:user.username }
+        console.log(requestBody)
 		axios.post(`http://localhost:5005/api/posts/${props.postId}`, requestBody)
 			.then(response => {
                 const comments = response.data
 				//setComments(comments)
                 props.handleClose()
+            
 			})
 			.catch(err => {
                 console.log(err)

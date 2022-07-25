@@ -6,12 +6,14 @@ import axios from 'axios'
 //import commentImg from '../assets/comment-icon.jpeg'
 import CreateComment from '../components/CreateComment'
 import { AiOutlineMessage } from 'react-icons/ai';
+import { BsArrowUpSquareFill, BsArrowDownSquareFill } from 'react-icons/bs'
 
 export default function Channel() {
 	const params = useParams()
 	const name = params.name
 
  	const [posts, setPosts] = useState([])
+	//const {comments, setComments} = useState([])
 
 	const [isOpenPost, setIsOpenPost] = useState(false)
 	const popupPost = () => {
@@ -22,17 +24,20 @@ export default function Channel() {
 			setIsOpenComment(!isOpenComment)
 		}
 
-	useEffect(() => {
-		axios.get(`http://localhost:5005/api/channel/${name}`)
-			.then(response => {
-				// console.log(response)
-				setPosts(response.data.posts)
-			})
-		.catch(err => console.log(err))
-	}, [name])
+	
+	function GetAllPosts() {
+		const name = params.name
 
-
-		
+		useEffect(() => {
+			axios.get(`http://localhost:5005/api/channel/${name}`)
+				.then(response => {
+					// console.log(response)
+					setPosts(response.data.posts)
+				})
+			.catch(err => console.log(err))
+		}, [name])
+	}
+	GetAllPosts()
 
 		return (
 		<div className="page-content">
@@ -49,18 +54,29 @@ export default function Channel() {
 							<h3>{post.title}</h3>
 							<p className='post-comment-creator'>Created by: {post.creator}</p>
 						</div>
-						<div className='post-info'>
-							<h4>{post.description}</h4>
-							<img className='post-img' src={post.fileURL} style={{width:'100px'}} alt="postImg" />
-						</div>
-						<div className="comment-area">
-							<AiOutlineMessage onClick={popupComment} />
-							{isOpenComment && <CreateComment handleClose={popupComment} postId ={post._id} />}
-							{/* {<img src={commentImg} alt="comment" onClick={popupComment} />} */}
-							
-							<div>
 
+						<div className='vote-container'>
+							<div className='vote-arrows'>
+								<BsArrowUpSquareFill onClick={popupComment}/>
+								<BsArrowDownSquareFill onClick={popupComment}/>
 							</div>
+							<div className='post-info'>
+								<h4>{post.description}</h4>
+								<img className='post-img' src={post.fileURL} style={{width:'100px'}} alt="postImg" />
+							</div>
+						</div>
+						
+						<div className="comment-icon">
+							<AiOutlineMessage onClick={popupComment}/>
+							{isOpenComment && <CreateComment handleClose={popupComment} postId ={post._id} />}
+						</div>
+						<div>
+							{post.comments.map((comment) => (
+								<div className='comment-container' key={comment._id}>
+									<p className='post-comment-creator'>Comment created by: {comment.creator}</p>
+									<p>{comment.text}</p>
+								</div>
+							))}
 						</div>
 					</div>
 				))}

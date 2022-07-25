@@ -31,6 +31,7 @@ export default function CreatePost(props) {
           .catch(err => console.log("Error while uploading the file: ", err));
       };
 
+
     const handleSubmit = event => {
 		event.preventDefault()
 		const requestBody = { title, fileURL, description, creator: user.username, channel: props.name }
@@ -44,6 +45,7 @@ export default function CreatePost(props) {
 				const errorDescription = err.response.data.message
 				setErrorMessage(errorDescription)
 			})
+    
     }
 
     const handleTitle = event => setTitle(event.target.value)
