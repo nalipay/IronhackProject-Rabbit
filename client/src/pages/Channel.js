@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom'
 import CreatePost from '../components/CreatePost'
 import axios from 'axios'
-import Posts from '../components/Posts'
+import Post from '../components/Post'
 
 export default function Channel() {
 	
@@ -34,9 +34,9 @@ export default function Channel() {
 			</div>
 			<div>
 				<h2>{name}</h2>
-				
-					<Posts posts={posts} />
-			
+				{posts.map((post) => (
+					<Post posts={post} />
+				))}
 			</div>
 		</div>
 			

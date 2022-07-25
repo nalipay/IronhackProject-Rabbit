@@ -36,18 +36,26 @@ function Navbar() {
 					</div>
 					<ul>
 						<li className='navLinks'>
-							<Link to='/home' style={{ textDecoration: 'none' }}>HOME</Link>
-							<br />
-							<Link to='/signup' style={{ textDecoration: 'none' }}>SIGNUP</Link>
-							<br />
-							<Link to='/login' style={{ textDecoration: 'none' }}>LOGIN</Link>
-							<br />
-							<Link to={popupChannel} onClick={popupChannel} style={{ textDecoration: 'none' }}>CREATE NEW CHANNEL</Link>
-							{isOpenChannel && <CreateChannel handleClose={popupChannel}/>}
-							<br />
-							{isLoggedIn && (
-								<Link onClick={logoutUser} to='/home' style={{ textDecoration: 'none' }}>LOGOUT</Link>
+							{isLoggedIn ?
+							(
+								<>
+								<Link to='/home' style={{ textDecoration: 'none' }}>HOME</Link>
+								<br />
+								<Link to={popupChannel} onClick={popupChannel} style={{ textDecoration: 'none' }}>CREATE NEW CHANNEL</Link>
+									{isOpenChannel && <CreateChannel handleClose={popupChannel}/>}
+									<br />
+									{isLoggedIn && (
+										<Link onClick={logoutUser} to='/home' style={{ textDecoration: 'none' }}>LOGOUT</Link>
 							)}
+								</>
+								) : (
+								<>
+								<Link to='/signup' style={{ textDecoration: 'none' }}>SIGNUP</Link>
+								<br />
+								<Link to='/login' style={{ textDecoration: 'none' }}>LOGIN</Link>
+								</>
+							)
+							}							
 						</li>
 					</ul>
 				</div>

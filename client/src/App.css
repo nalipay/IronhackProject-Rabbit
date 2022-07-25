@@ -3,7 +3,7 @@
 body {
   height: 100%;
   margin-right: 20vw;
-  background: linear-gradient(90deg, #ffffff 80%, #ffffff 20%);
+  background: linear-gradient(90deg, #e6e6e7 80%, #ffffff 20%);
 }
 h1 {
   font-family: 'Roboto Mono', monospace;
