@@ -41,7 +41,7 @@ export default function Comment(props) {
 	return (
         <>
             <div className="popup-box">
-                <div className="box-channel">
+                <div className="popup-container">
                     <span className="close-icon" onClick={props.handleClose}>x</span>
                     <h2>Make a comment</h2>
                     <form onSubmit={handleSubmit}>

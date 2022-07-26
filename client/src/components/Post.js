@@ -1,45 +1,43 @@
 import React, {useState, useEffect} from 'react'
+import { AiOutlineMessage } from 'react-icons/ai';
+import { BsArrowUpSquareFill, BsArrowDownSquareFill } from 'react-icons/bs'
+import CreateComment from './CreateComment'
 
-// import { AiOutlineMessage } from 'react-icons/ai';
-// import { BsArrowUpSquareFill, BsArrowDownSquareFill } from 'react-icons/bs'
-// import CreateComment from './CreateComment'
+import axios from 'axios';
 
+export default function Post(props) {
+    const[count,setCount]=useState(props.post.votes);
+	const [isOpenComment, setIsOpenComment] = useState(false)
 
+	const popupComment = () => {
+			setIsOpenComment(!isOpenComment)
+		}
 
-
-export default function Post({props}) {
-
-	// const [isOpenComment, setIsOpenComment] = useState(false)
-	// const popupComment = () => {
-	// 		setIsOpenComment(!isOpenComment)
-	// 	}
-
-
-
-    // const[count,setCount]=useState(0);
-	// const inc=()=>{
-	// 	setCount(count+1);
-	//   }
-	//   const dec=()=>{
-	// 	if(count>0)
-	// 	setCount(count-1);
-	//   }
-    
+	function saveVote(id, amount) {
+		console.log('save vote')
+		axios.post('http://localhost:5005/api/posts/vote', {id, amount})
+			.then(response => {
+				setCount(count+amount);			
+			})
+			.catch(err => console.log(err))
+	}
+	const inc=()=>{
+		saveVote(props.post._id, 1)
+	  }
+	const dec=()=>{
+		saveVote(props.post._id, -1)
+	  }
 
     return (
 		<div className="page-content">
-			<div>
-					<div className="post-wrap" key={props.post._id}>
-			
+
+					<div className="post-wrap">
 						<div className='post-top'>
-                        
-						<h3>hallo</h3>
-							{/* <h3>{props.posts.title}</h3> */}
-                            
-							{/* <p className='post-comment-creator'>Created by: {props.post.creator}</p> */}
+							<h3>{props.post.title}</h3>
+							<p className='post-comment-creator'>Created by: {props.post.creator}</p>
 						</div>
 
-						{/* <div className='vote-container'>
+						<div className='vote-container'>
 							<div className='icons'>
 								<BsArrowUpSquareFill onClick={inc}/>
 								<p>{count}</p>
@@ -49,9 +47,9 @@ export default function Post({props}) {
 								<h4>{props.post.description}</h4>
 								<img className='post-img' src={props.post.fileURL} style={{width:'100px'}} alt="postImg" />
 							</div>
-						</div> */}
+						</div>
 						
-						{/* <div className="comment-icon-container">
+						<div className="comment-icon-container">
                             <div className='icons'>
                                 <AiOutlineMessage onClick={popupComment}/>
 							    {isOpenComment && <CreateComment handleClose={popupComment} postId ={props.post._id} />}
@@ -64,9 +62,8 @@ export default function Post({props}) {
                                     </div>
                                 ))}
                             </div> 
-						</div> */}
+						</div>
 					</div>
-			</div>
 		</div>
 		)
 }

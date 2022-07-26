@@ -4,6 +4,8 @@ import { Link, useParams } from 'react-router-dom'
 import CreatePost from '../components/CreatePost'
 import axios from 'axios'
 import Post from '../components/Post'
+import Searchbar from '../components/Searchbar'
+
 
 export default function Channel() {
 	
@@ -20,22 +22,23 @@ export default function Channel() {
 		useEffect(() => {
 			axios.get(`http://localhost:5005/api/channel/${name}`)
 				.then(response => {
-					// console.log(response)
+					 //console.log('hallo',response.data)
 					setPosts(response.data.posts)
 				})
 			.catch(err => console.log(err))
 		}, [name])
 
 		return (
-		<div>
-			<div>
-				<Link to={popupPost} onClick={popupPost}>Create new post</Link>
+		<div className='page-content'>
+			<Searchbar />
+			<div className='channel-heading'>
+				<h2>{name}</h2>
+				<Link className="create-post-link" to={popupPost} onClick={popupPost}>CREATE NEW POST</Link>
 				{isOpenPost && <CreatePost handleClose={popupPost} name={name}/>}
 			</div>
 			<div>
-				<h2>{name}</h2>
 				{posts.map((post) => (
-					<Post posts={post} />
+					<Post post={post} key={post._id}/>
 				))}
 			</div>
 		</div>

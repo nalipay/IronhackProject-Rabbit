@@ -52,20 +52,20 @@ export default function CreatePost(props) {
 	return (
         <>
             <div className="popup-box">
-                <div className="box-channel">
+                <div className="popup-container">
                     <span className="close-icon" onClick={props.handleClose}>x</span>
                     <h2>Create a post</h2>
+                    <br /> <br />
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="title">Title: </label>
                         <input type="text" value={title} onChange={handleTitle} />
-                        <br />
+                        <br /> <br />
                         <label htmlFor="file">File Upload: </label>
-                        <input onChange={(e) => handleFileUpload(e)} type="file" />
-                        <br />
+                        <input onChange={(e) => handleFileUpload(e)} type="file" style={{}} />
+                        <br /> <br />
                         <label htmlFor="description">Description: </label>
                         <input onChange={e => setDescription(e.target.value)} type="text" />
-                        <br />
-                        <button type="submit">Add new post</button>
+                        <button className="signup-login-btn" type="submit">Add new post</button>
                     </form>
                     {errorMessage && <h5>{errorMessage}</h5>}
                 </div>

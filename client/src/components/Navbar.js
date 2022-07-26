@@ -3,32 +3,33 @@ import { Link } from 'react-router-dom'
 // import ImgLogo from '../assets/_rabbit.png'
 import CreateChannel from './CreateChannel'
 import { AuthContext } from '../context/auth';
+import LoginForm from '../components/LoginForm';
+import SignupForm from '../components/SignupForm'
 
 
 function Navbar() {
-	const [search, setSearch] = useState('')
-
+	
 	const [isOpenChannel, setIsOpenChannel] = useState(false)
+	const [isOpenLogin, setIsOpenLogin] = useState(false)
+	const [isOpenSignup, setIsOpenSignup] = useState(false)
 
-	const handleSearchChange = event => {
-		setSearch(event.target.value)
-	  }
 	const popupChannel = () => {
 		setIsOpenChannel(!isOpenChannel);
 	  }
+	const popupLogin = () => {
+		setIsOpenLogin(!isOpenLogin)
+		setIsOpenSignup(false)
+	}
+	const popupSignup = () => {
+		setIsOpenSignup(!isOpenSignup)
+		setIsOpenLogin(false)
+	}
 	const { isLoggedIn, logoutUser } = useContext(AuthContext);
 
 	return (
 	
 		<div>
 			<nav>
-				<div className='topNav'>
-					<form>
-							<input className='search-field' type="text" value={search}
-								placeholder="Search for channel" name="input" 
-								onChange={handleSearchChange} />	
-					</form>
-				</div>
 				<div className='sideNav'>
 					<div className='logo-header'>
 						{/* <img src={ImgLogo} height='80' alt='homepic' /> */}
@@ -43,16 +44,23 @@ function Navbar() {
 								<br />
 								<Link to={popupChannel} onClick={popupChannel} style={{ textDecoration: 'none' }}>CREATE NEW CHANNEL</Link>
 									{isOpenChannel && <CreateChannel handleClose={popupChannel}/>}
-									<br />
-									{isLoggedIn && (
-										<Link onClick={logoutUser} to='/home' style={{ textDecoration: 'none' }}>LOGOUT</Link>
+								<br />
+								{isLoggedIn && (
+									<Link onClick={logoutUser} to='/home' style={{ textDecoration: 'none' }}>LOGOUT</Link>
 							)}
 								</>
 								) : (
 								<>
-								<Link to='/signup' style={{ textDecoration: 'none' }}>SIGNUP</Link>
 								<br />
-								<Link to='/login' style={{ textDecoration: 'none' }}>LOGIN</Link>
+								<Link to={popupSignup} onClick={popupSignup} style={{ textDecoration: 'none' }}>SIGNUP</Link>
+									{isOpenSignup && <SignupForm popupLogin={popupLogin} handleClose={popupSignup}/>}
+								<br />
+								<Link to={popupLogin} onClick={popupLogin} style={{ textDecoration: 'none' }}>LOGIN</Link>
+									{isOpenLogin && <LoginForm popupSignup={popupSignup} handleClose={popupLogin}/>}
+									<br />
+									
+								
+
 								</>
 							)
 							}							

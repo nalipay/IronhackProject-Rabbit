@@ -96,6 +96,19 @@ router.get("posts/:id", (req, res, next) => {
     })
 })
 
+router.post("/posts/vote", (req, res, next) => {
+  const {id, amount} = req.body
+  // console.log('REQ BODY', req.body)
+  Post.findByIdAndUpdate(id, { $inc: { votes: amount} })
+    .then((updatedPost) => {
+      res.json(updatedPost)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: 'Internal Server Error' })
+    })
+})
+
 router.post("/posts/:id", (req, res, next) => {
   const {id} = req.params
   const {comment, creator} = req.body
@@ -109,6 +122,19 @@ router.post("/posts/:id", (req, res, next) => {
       })
     
     })
+
+  router.get("/channels", (req, res, next) => {
+  const {q} = req.query
+  //console.log(q)
+  Channel.find({"name" : {$regex : q}})
+    .then(foundChannels => {
+      res.json(foundChannels)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: 'Internal Server Error' })
+    })
+})
 
 
 module.exports = router;

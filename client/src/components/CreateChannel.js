@@ -29,14 +29,13 @@ export default function Channel(props) {
 	return (
         <>
             <div className="popup-box">
-                <div className="box-channel">
+                <div className="popup-container">
                     <span className="close-icon" onClick={props.handleClose}>x</span>
                     <h2>Name your channel</h2>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="name">Name: </label>
                         <input type="text" value={name} onChange={handleName} />
-                        <br />
-                        <button type="submit">Add new channel</button>
+                        <button className="signup-login-btn" type="submit">Add new channel</button>
                     </form>
                     {errorMessage && <h5>{errorMessage}</h5>}
                 </div>

@@ -10,7 +10,8 @@ const postSchema = new Schema(
             type: String    
         },
         votes: {
-            type: Number
+            type: Number,
+            default: 0
         },
         fileURL: {
             type: String

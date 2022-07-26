@@ -25,7 +25,6 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/channel/:name' element={<Channel />} />
         
-        
       </Routes>
     </>
     
