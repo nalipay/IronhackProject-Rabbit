@@ -5,7 +5,7 @@ import CreatePost from '../components/CreatePost'
 import axios from 'axios'
 import Post from '../components/Post'
 import Searchbar from '../components/Searchbar'
-import { HiOutlineTrash } from 'react-icons/hi'
+
 
 
 
@@ -34,12 +34,12 @@ export default function Channel() {
 		<div className='page-content'>
 			<Searchbar />
 			<div className='channel-heading'>
-				<h2>{name} <HiOutlineTrash onClick={popupPost} /></h2>
+				<h2>{name}</h2>
 				<Link className="create-post-link" to={popupPost} onClick={popupPost}>CREATE NEW POST</Link>
 				{isOpenPost && <CreatePost posts={posts} setPosts={setPosts} handleClose={popupPost} name={name}/>}
 			</div>
 			<div>
-				{posts.map((post) => (
+				{posts.reverse().map((post) => (
 					<Post post={post} key={post._id}/>
 				))}
 			</div>

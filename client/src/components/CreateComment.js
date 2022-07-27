@@ -22,10 +22,10 @@ export default function Comment(props) {
 		axios.post(`http://localhost:5005/api/posts/${props.postId}`, requestBody)
            
 			.then(response => {
-                console.log(props.postId)
-                const comments = response.data
-				//setComments(comments)
+                //console.log(props.postId)
+           
                 props.handleClose()
+                props.setComments(response.data.comments)
             
 			})
 			.catch(err => {

@@ -20,7 +20,7 @@ export default function Home() {
 	return (
 		<div>
 		<Searchbar />
-		<h2>hallo</h2>
+		<h2>Welcome {}</h2>
 			<div>
 				{posts.sort((a, b) => {
 					return b.votes - a.votes }).map((post) => (

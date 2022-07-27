@@ -146,7 +146,7 @@ h4 {
 }
 .post-comment-creator {
   font-size: 10px;
-  margin-left: 12px;
+  margin: 0 12px;
 }
 .comment-icon-container {
   display: flex;

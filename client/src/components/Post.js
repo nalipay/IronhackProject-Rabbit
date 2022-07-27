@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react'
+import axios from 'axios';
+import CreateComment from './CreateComment'
 import { AiOutlineMessage } from 'react-icons/ai';
 import { BsArrowUpSquareFill, BsArrowDownSquareFill } from 'react-icons/bs'
-import CreateComment from './CreateComment'
+import { FaTrashAlt } from 'react-icons/fa'
 
-import axios from 'axios';
+
 
 export default function Post(props) {
-    const[count,setCount]=useState(props.post.votes);
+    const[count,setCount] = useState(props.post.votes);
+	const[comments, setComments] = useState(props.post.comments)
 	const [isOpenComment, setIsOpenComment] = useState(false)
 
 	const popupComment = () => {
@@ -28,10 +31,19 @@ export default function Post(props) {
 		saveVote(props.post._id, -1)
 	  }
 
+	const deletePost = () => {
+		axios.delete(`/api/posts/${props.id}`)
+			.then(() => {
+
+			})
+			.catch(err => console.log(err))
+	}
+
     return (
 		<div className="page-content">
 
 					<div className="post-wrap">
+						<FaTrashAlt onClick={deletePost} />
 						<div className='post-top'>
 							<h3>{props.post.title}</h3>
 							<p className='post-comment-creator'>Created by: {props.post.creator}</p>
@@ -53,11 +65,11 @@ export default function Post(props) {
 						<div className="comment-icon-container">
                             <div className='icons'>
                                 <AiOutlineMessage onClick={popupComment}/>
-							    {isOpenComment && <CreateComment handleClose={popupComment} postId ={props.post._id} />}
+							    {isOpenComment && <CreateComment handleClose={popupComment} postId ={props.post._id} setComments={setComments}/>}
 								
                             </div>
 							<div className='comment-info'>
-                                {props.post.comments.map((comment) => (
+                                {comments.map((comment) => (
                                     <div className='comment-container' key={comment._id}>
                                         <p className='post-comment-creator'>Comment created by: {comment.creator}</p>
                                         <p>{comment.text}</p>
