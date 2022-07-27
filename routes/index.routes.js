@@ -147,5 +147,14 @@ router.get("/posts", (req, res, next) => {
     })
 })
 
+router.delete('/posts/:id', (req, res, next) => {
+
+  console.log(req.params)
+	Post.findByIdAndDelete(req.params.id)
+		.then(() => {
+			res.status(200).json({ message: 'post deleted' })
+		})
+		.catch(err => next(err))
+});
 
 module.exports = router;

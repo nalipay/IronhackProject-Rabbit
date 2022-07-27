@@ -2,7 +2,6 @@
 import React, { useContext } from 'react'
 import { useState, useEffect } from "react";
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/auth'
 
 
@@ -13,7 +12,6 @@ export default function Comment(props) {
     //const [comments, setComments] = useState([])
     const [errorMessage, setErrorMessage] = useState("")
 
-    const navigate = useNavigate()
 
     const handleSubmit = event => {
 		event.preventDefault()

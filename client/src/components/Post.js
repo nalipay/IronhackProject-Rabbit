@@ -1,16 +1,22 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useContext} from 'react'
 import axios from 'axios';
 import CreateComment from './CreateComment'
+import { AuthContext } from '../context/auth';
+import { useNavigate } from 'react-router-dom'
 import { AiOutlineMessage } from 'react-icons/ai';
 import { BsArrowUpSquareFill, BsArrowDownSquareFill } from 'react-icons/bs'
 import { FaTrashAlt } from 'react-icons/fa'
-
-
 
 export default function Post(props) {
     const[count,setCount] = useState(props.post.votes);
 	const[comments, setComments] = useState(props.post.comments)
 	const [isOpenComment, setIsOpenComment] = useState(false)
+
+	const { isLoggedIn, user} = useContext(AuthContext);
+
+
+	const navigate = useNavigate()
+
 
 	const popupComment = () => {
 			setIsOpenComment(!isOpenComment)
@@ -20,7 +26,7 @@ export default function Post(props) {
 		//console.log('save vote')
 		axios.post('http://localhost:5005/api/posts/vote', {id, amount})
 			.then(response => {
-				setCount(count+amount);			
+				setCount(count+amount);	
 			})
 			.catch(err => console.log(err))
 	}
@@ -32,18 +38,21 @@ export default function Post(props) {
 	  }
 
 	const deletePost = () => {
-		axios.delete(`/api/posts/${props.id}`)
+		axios.delete(`/api/posts/${props.post._id}`)
 			.then(() => {
-
+				props.getAllPosts()
 			})
 			.catch(err => console.log(err))
 	}
+
+	console.log(props)
+
 
     return (
 		<div className="page-content">
 
 					<div className="post-wrap">
-						<FaTrashAlt onClick={deletePost} />
+						{(isLoggedIn && user.username === props.post.creator) && (<FaTrashAlt onClick={deletePost} />)}
 						<div className='post-top'>
 							<h3>{props.post.title}</h3>
 							<p className='post-comment-creator'>Created by: {props.post.creator}</p>

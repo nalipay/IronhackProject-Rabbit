@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import Post from '../components/Post'
 import Searchbar from '../components/Searchbar'
+import { PromiseProvider } from 'mongoose'
 
 export default function Home() {
 	
@@ -11,7 +12,7 @@ export default function Home() {
 	useEffect(() => {
 		axios.get(`http://localhost:5005/api/posts`)
 			.then(response => {
-				 console.log('hallo',response.data)
+				 //console.log('hallo',response.data)
 				setPosts(response.data)
 			})
 		.catch(err => console.log(err))

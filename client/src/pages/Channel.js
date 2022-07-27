@@ -20,15 +20,18 @@ export default function Channel() {
 	const popupPost = () => {
 			setIsOpenPost(!isOpenPost)
 		}
-
-		useEffect(() => {
-			axios.get(`http://localhost:5005/api/channel/${name}`)
+	
+	function getAllPosts() {
+		axios.get(`http://localhost:5005/api/channel/${name}`)
 				.then(response => {
 					 //console.log('hallo',response.data)
 					setPosts(response.data.posts)
 				})
 			.catch(err => console.log(err))
-		}, [name])
+	}
+		useEffect(() => {
+			getAllPosts()
+		}, [])
 
 		return (
 		<div className='page-content'>
@@ -40,7 +43,7 @@ export default function Channel() {
 			</div>
 			<div>
 				{posts.reverse().map((post) => (
-					<Post post={post} key={post._id}/>
+					<Post getAll={getAllPosts} post={post} key={post._id} />
 				))}
 			</div>
 		</div>
