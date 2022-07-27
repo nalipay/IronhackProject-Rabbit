@@ -40,13 +40,13 @@ function Navbar() {
 							{isLoggedIn ?
 							(
 								<>
-								<Link to='/home' style={{ textDecoration: 'none' }}>HOME</Link>
+								<Link to='/' style={{ textDecoration: 'none' }}>HOME</Link>
 								<br />
 								<Link to={popupChannel} onClick={popupChannel} style={{ textDecoration: 'none' }}>CREATE NEW CHANNEL</Link>
 									{isOpenChannel && <CreateChannel handleClose={popupChannel}/>}
 								<br />
 								{isLoggedIn && (
-									<Link onClick={logoutUser} to='/home' style={{ textDecoration: 'none' }}>LOGOUT</Link>
+									<Link onClick={logoutUser} to='/' style={{ textDecoration: 'none' }}>LOGOUT</Link>
 							)}
 								</>
 								) : (

@@ -136,5 +136,16 @@ router.post("/posts/:id", (req, res, next) => {
     })
 })
 
+router.get("/posts", (req, res, next) => {
+  Post.find()
+    .then(foundPosts => {
+      res.json(foundPosts)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: 'Internal Server Error' })
+    })
+})
+
 
 module.exports = router;

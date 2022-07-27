@@ -12,12 +12,14 @@ export default function Searchbar(props) {
 		setSearch(event.target.value)
 	  }
     useEffect(() => {
-        axios.get(`http://localhost:5005/api/channels?q=${search}`)
-				.then(response => {
-                    //console.log(response.data)
-					setFilteredList(response.data)
-				})
-			.catch(err => console.log(err))
+        if(search.length > 0) {
+            axios.get(`http://localhost:5005/api/channels?q=${search}`)
+            .then(response => {
+                //console.log(response.data)
+                setFilteredList(response.data)
+            })
+        .catch(err => console.log(err))
+        }
     }, [search])
     
     //   const filteredChannels = filteredList.filter(channel => {
@@ -39,7 +41,7 @@ export default function Searchbar(props) {
                     <div>
                         {search && filteredList.map(channel => (
                             <div key={channel.name}>
-                                <Link className="search-channel" to='/channel/'>{channel.name}</Link>
+                                <Link className="search-channel" to={'/channel/' + channel.name}>{channel.name}</Link>
                             </div>
                             ))}
                     </div>

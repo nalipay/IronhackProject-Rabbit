@@ -14,7 +14,7 @@ export default function Post(props) {
 		}
 
 	function saveVote(id, amount) {
-		console.log('save vote')
+		//console.log('save vote')
 		axios.post('http://localhost:5005/api/posts/vote', {id, amount})
 			.then(response => {
 				setCount(count+amount);			
@@ -46,6 +46,7 @@ export default function Post(props) {
 							<div className='post-info'>
 								<h4>{props.post.description}</h4>
 								<img className='post-img' src={props.post.fileURL} style={{width:'100px'}} alt="postImg" />
+								
 							</div>
 						</div>
 						
@@ -53,6 +54,7 @@ export default function Post(props) {
                             <div className='icons'>
                                 <AiOutlineMessage onClick={popupComment}/>
 							    {isOpenComment && <CreateComment handleClose={popupComment} postId ={props.post._id} />}
+								
                             </div>
 							<div className='comment-info'>
                                 {props.post.comments.map((comment) => (

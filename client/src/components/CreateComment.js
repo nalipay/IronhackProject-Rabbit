@@ -46,7 +46,7 @@ export default function Comment(props) {
                     <h2>Make a comment</h2>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="comment"></label>
-                        <input type="text" value={comment} onChange={handleComment} />
+                        <input className="comment-input" type="text" value={comment} onChange={handleComment} />
                         <br />
                         <button type="submit">Add new comment</button>
                         {/* <p className='post-comment-creator'>Created by: {comment.creator}</p>

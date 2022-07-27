@@ -159,6 +159,11 @@ h4 {
   width: 40vw;
   padding: 10px 30px;
 }
+.comment-input {
+  width: 40vw;
+  height: 5vh;
+  display: block;
+}
 .vote-container {
   display: flex;
   justify-content:center;
