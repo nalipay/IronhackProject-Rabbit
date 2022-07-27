@@ -53,7 +53,7 @@ function Navbar() {
 								<>
 								<br />
 								<Link to={popupSignup} onClick={popupSignup} style={{ textDecoration: 'none' }}>SIGNUP</Link>
-									{isOpenSignup && <SignupForm popupLogin={popupLogin} handleClose={popupSignup}/>}
+									{isOpenSignup && <SignupForm popupLogin={popupLogin} handleClose={popupSignup} setIsOpenLogin={setIsOpenLogin}/>}
 								<br />
 								<Link to={popupLogin} onClick={popupLogin} style={{ textDecoration: 'none' }}>LOGIN</Link>
 									{isOpenLogin && <LoginForm popupSignup={popupSignup} handleClose={popupLogin}/>}

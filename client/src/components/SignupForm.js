@@ -15,8 +15,9 @@ export default function Signup(props) {
 		const requestBody = { username, password, }
 		axios.post('http://localhost:5005/api/auth/signup', requestBody)
 			.then(response => {
-				navigate('/login')
+				//navigate('/login')
 				props.handleClose()
+				props.setIsOpenLogin(true)
 			})
 			.catch(err => {
                 console.log(err)
@@ -42,7 +43,7 @@ export default function Signup(props) {
 						<br />
 						<label htmlFor="password">Password: </label>
 						<input className="signup-login-input" type="password" value={password} onChange={handlePassword} />
-						<button className="signup-login-btn" type="submit">Sign Up</button>
+						<button className="signup-login-btn" type="submit">Sign Up </button>
 					</form>
 
 					{errorMessage && <h5>{errorMessage}</h5>}
