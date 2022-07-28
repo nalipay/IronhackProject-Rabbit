@@ -31,7 +31,7 @@ export default function Channel() {
 	}
 		useEffect(() => {
 			getAllPosts()
-		}, [])
+		}, [name])
 
 		return (
 		<div className='page-content'>
