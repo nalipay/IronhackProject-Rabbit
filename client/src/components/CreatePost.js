@@ -62,7 +62,7 @@ export default function CreatePost(props) {
                         <input type="text" value={title} onChange={handleTitle} />
                         <br /> <br />
                         <label htmlFor="file">File Upload: </label>
-                        <input onChange={(e) => handleFileUpload(e)} type="file" style={{}} />
+                        <input onChange={(e) => handleFileUpload(e)} type="file" />
                         <br /> <br />
                         <label htmlFor="description">Description: </label>
                         <input onChange={e => setDescription(e.target.value)} type="text" />

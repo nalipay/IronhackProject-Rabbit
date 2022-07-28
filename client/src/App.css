@@ -148,6 +148,11 @@ h4 {
   font-size: 10px;
   margin: 0 12px;
 }
+.trash-img {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
 .comment-icon-container {
   display: flex;
   justify-content:center;

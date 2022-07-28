@@ -36,7 +36,6 @@ export default function Post(props) {
 	const dec=()=>{
 		saveVote(props.post._id, -1)
 	  }
-
 	
 	const deletePost = () => {
 		axios.delete(`/api/posts/${props.post._id}`)
@@ -46,12 +45,13 @@ export default function Post(props) {
 			.catch(err => console.log(err))
 	}
 
-
     return (
 		<div className="page-content">
 
 					<div className="post-wrap">
-						{(isLoggedIn && user.username === props.post.creator) && (<FaTrashAlt onClick={deletePost} />)}
+						<div className='trash-img'>
+							{(isLoggedIn && user.username === props.post.creator) && (<FaTrashAlt onClick={deletePost} />)}
+						</div>
 						<div className='post-top'>
 							{/* <h4>Channel: {props.post.channel}</h4>  */}
 							<h3 style={{color:'#ff6602'}}>{props.post.title}</h3>
