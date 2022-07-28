@@ -36,7 +36,7 @@ export default function CreatePost(props) {
 		event.preventDefault()
 		const requestBody = { title, fileURL, description, creator: user.username, channel: props.name }
         //console.log(requestBody)
-		axios.post('http://localhost:5005/api/posts', requestBody)
+		axios.post('/api/posts', requestBody)
 			.then(response => {
                 props.handleClose()
                 props.setPosts([...props.posts, response.data])

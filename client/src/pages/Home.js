@@ -13,7 +13,7 @@ const { isLoggedIn, user} = useContext(AuthContext);
 
 
 function getAllPosts() {
-	axios.get(`http://localhost:5005/api/posts`)
+	axios.get(`/api/posts`)
 			.then(response => {
 				 //console.log('hallo',response.data)
 				setPosts(response.data)

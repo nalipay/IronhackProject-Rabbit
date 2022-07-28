@@ -13,7 +13,7 @@ export default function Searchbar(props) {
 	  }
     useEffect(() => {
         if(search.length > 0) {
-            axios.get(`http://localhost:5005/api/channels?q=${search}`)
+            axios.get(`/api/channels?q=${search}`)
             .then(response => {
                 //console.log(response.data)
                 setFilteredList(response.data)

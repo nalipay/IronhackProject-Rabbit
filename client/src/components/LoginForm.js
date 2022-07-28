@@ -17,7 +17,7 @@ export default function Login(props) {
 	const handleSubmit = e => {
 		e.preventDefault()
 		const requestBody = { username, password }
-		axios.post('http://localhost:5005/api/auth/login', requestBody)
+		axios.post('/api/auth/login', requestBody)
 			.then(response => {
 				const token = response.data.authToken
 				// store the token

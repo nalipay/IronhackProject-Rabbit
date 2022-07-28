@@ -22,7 +22,7 @@ export default function Channel() {
 		}
 	
 	function getAllPosts() {
-		axios.get(`http://localhost:5005/api/channel/${name}`)
+		axios.get(`/api/channel/${name}`)
 				.then(response => {
 					 //console.log('hallo',response.data)
 					setPosts(response.data.posts)

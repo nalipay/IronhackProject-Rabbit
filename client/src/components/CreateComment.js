@@ -17,7 +17,7 @@ export default function Comment(props) {
 		event.preventDefault()
 		const requestBody = { comment, creator:user.username }
         //console.log(requestBody)
-		axios.post(`http://localhost:5005/api/posts/${props.postId}`, requestBody)
+		axios.post(`/api/posts/${props.postId}`, requestBody)
            
 			.then(response => {
                 //console.log(props.postId)

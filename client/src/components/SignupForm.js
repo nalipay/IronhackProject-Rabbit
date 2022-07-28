@@ -13,7 +13,7 @@ export default function Signup(props) {
 	const handleSubmit = e => {
 		e.preventDefault()
 		const requestBody = { username, password, }
-		axios.post('http://localhost:5005/api/auth/signup', requestBody)
+		axios.post('/api/auth/signup', requestBody)
 			.then(response => {
 				//navigate('/login')
 				props.handleClose()

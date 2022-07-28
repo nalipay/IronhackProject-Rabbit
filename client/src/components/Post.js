@@ -24,7 +24,7 @@ export default function Post(props) {
 
 	function saveVote(id, amount) {
 		//console.log('save vote')
-		axios.post('http://localhost:5005/api/posts/vote', {id, amount})
+		axios.post('/api/posts/vote', {id, amount})
 			.then(response => {
 				setCount(count+amount);	
 			})

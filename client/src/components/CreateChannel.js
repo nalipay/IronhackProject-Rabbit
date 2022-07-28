@@ -14,7 +14,7 @@ export default function Channel(props) {
     const handleSubmit = event => {
 		event.preventDefault()
 		const requestBody = { name }
-		axios.post('http://localhost:5005/api/channels', requestBody)
+		axios.post('/api/channels', requestBody)
 			.then(response => {
                 props.handleClose()
 				navigate('/channel/'+ name)
