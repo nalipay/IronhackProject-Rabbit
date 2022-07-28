@@ -5,8 +5,6 @@ require("dotenv/config");
 // ℹ️ Connects to the database
 require("./db");
 
-const path = require('path');
-app.use(express.static(path.join(__dirname, "/client/build")));
 
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
@@ -24,6 +22,10 @@ app.use("/api", allRoutes);
 
 const authRoutes = require("./routes/auth")
 app.use("/api/auth", authRoutes)
+
+
+const path = require('path');
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 app.use((req, res) => {
     // If no routes match, send them the React HTML.
