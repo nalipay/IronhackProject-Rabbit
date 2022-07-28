@@ -43,7 +43,7 @@ export default function Channel() {
 			</div>
 			<div>
 				{posts.reverse().map((post) => (
-					<Post getAll={getAllPosts} post={post} key={post._id} />
+					<Post post={post} key={post._id} getAllPosts={getAllPosts} />
 				))}
 			</div>
 		</div>

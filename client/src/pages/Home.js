@@ -1,36 +1,42 @@
 
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import axios from 'axios'
 import Post from '../components/Post'
+import { AuthContext } from '../context/auth';
+
 import Searchbar from '../components/Searchbar'
-import { PromiseProvider } from 'mongoose'
 
 export default function Home() {
 	
-	const [posts, setPosts] = useState([])
+const [posts, setPosts] = useState([])
+const { isLoggedIn, user} = useContext(AuthContext);
 
-	useEffect(() => {
-		axios.get(`http://localhost:5005/api/posts`)
+
+function getAllPosts() {
+	axios.get(`http://localhost:5005/api/posts`)
 			.then(response => {
 				 //console.log('hallo',response.data)
 				setPosts(response.data)
 			})
 		.catch(err => console.log(err))
+}
+	useEffect(() => {
+		getAllPosts()
 	}, [])
 
 	return (
-		<div>
-		<Searchbar />
-		<h2>Welcome {}</h2>
 			<div>
+				<div>
+				<Searchbar />
+				{(isLoggedIn) && (<h2 className='channel-heading'>Welcome {user.username}</h2>)}
 				{posts.sort((a, b) => {
 					return b.votes - a.votes }).map((post) => (
 						<div key={post._id}>
-							<Post post={post} />
+							<Post post={post} getAllPosts={getAllPosts}/>
 						</div>
 						
 					))
-			}
+				}
 			</div>
 		</div>
 	)
