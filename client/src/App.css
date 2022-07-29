@@ -151,6 +151,7 @@ h4 {
 .trash-img {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   margin-top: 10px;
 }
 .comment-icon-container {
