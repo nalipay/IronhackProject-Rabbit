@@ -4,7 +4,6 @@ import { useState } from "react";
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-
 export default function Channel(props) {
     const [name, setName] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
@@ -26,6 +25,7 @@ export default function Channel(props) {
 			})
     }
     const handleName = event => setName(event.target.value)
+    
 	return (
         <>
             <div className="popup-box">

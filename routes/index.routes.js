@@ -8,12 +8,7 @@ router.get("/", (req, res, next) => {
   res.json("All good in here");
 })
 
-// You put the next routes here 👇
-// example: router.use("/auth", authRoutes)
-
-router.post("/upload", fileUploader.single("fileURL"), (req, res, next) => {
-  //console.log(req.file)
- 
+router.post("/upload", fileUploader.single("fileURL"), (req, res, next) => { 
   res.json({ secure_url: req.file.path });
 });
 
@@ -40,7 +35,6 @@ router.post("/channels", (req, res, next) => {
 					res.status(201).json({ channel: channel })
 				})
 				.catch(err => {
-					//console.log(err)
 					res.status(500).json({ message: 'Internal Server Error' })
 				})
 		})   
@@ -56,10 +50,8 @@ router.post("/posts", (req, res, next) => {
 
   return Post.create({title, fileURL, description, creator, channel})
     .then(createdPost => {
-      //console.log(createdPost)
       Channel.findOneAndUpdate({name:channel}, {$push: {posts:createdPost._id}})
         .then((updatedChannel) => {
-        console.log(updatedChannel)
         res.json(createdPost)
       })
     
@@ -98,7 +90,6 @@ router.get("posts/:id", (req, res, next) => {
 
 router.post("/posts/vote", (req, res, next) => {
   const {id, amount} = req.body
-  // console.log('REQ BODY', req.body)
   Post.findByIdAndUpdate(id, { $inc: { votes: amount} })
     .then((updatedPost) => {
       res.json(updatedPost)
@@ -125,7 +116,6 @@ router.post("/posts/:id", (req, res, next) => {
 
   router.get("/channels", (req, res, next) => {
   const {q} = req.query
-  //console.log(q)
   Channel.find({"name" : {$regex : q}})
     .then(foundChannels => {
       res.json(foundChannels)

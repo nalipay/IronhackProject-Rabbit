@@ -14,22 +14,20 @@ export default function Post(props) {
 
 	const { isLoggedIn, user} = useContext(AuthContext);
 
-
 	const navigate = useNavigate()
-
 
 	const popupComment = () => {
 			setIsOpenComment(!isOpenComment)
 		}
 
 	function saveVote(id, amount) {
-		//console.log('save vote')
 		axios.post('/api/posts/vote', {id, amount})
 			.then(response => {
 				setCount(count+amount);	
 			})
 			.catch(err => console.log(err))
 	}
+
 	const inc=()=>{
 		saveVote(props.post._id, 1)
 	  }
@@ -48,47 +46,44 @@ export default function Post(props) {
     return (
 		<div className="page-content">
 
-					<div className="post-wrap">
-						<div className='trash-img'>
-							{(isLoggedIn && user.username === props.post.creator) && (<FaTrashAlt onClick={deletePost} />)}
-						</div>
-						<div className='post-top'>
-							{/* <h4>Channel: {props.post.channel}</h4>  */}
-							<h3 style={{color:'#ff6602'}}>{props.post.title}</h3>
-							<p className='post-comment-creator'>Created by: {props.post.creator}</p>
-							<Link style={{color:'#b3b3b3'}} to={'/channel/' + props.post.channel}>{props.post.channel}</Link>
-						</div>
+			<div className="post-wrap">
+				<div className='trash-img'>
+					{(isLoggedIn && user.username === props.post.creator) && (<FaTrashAlt onClick={deletePost} />)}
+				</div>
+				<div className='post-top'>
+					<h3 style={{color:'#ff6602'}}>{props.post.title}</h3>
+					<p className='post-comment-creator'>Created by: {props.post.creator}</p>
+					<Link style={{color:'#b3b3b3'}} to={'/channel/' + props.post.channel}>{props.post.channel}</Link>
+				</div>
 
-						<div className='vote-container'>
-							<div className='icons'>
-								{/* {(isLoggedIn) && (<BsArrowUpSquareFill onClick={inc} />)} */}
-								<BsArrowUpSquareFill onClick={inc}/>
-								<p>{count}</p>
-								<BsArrowDownSquareFill onClick={dec}/>
-							</div>
-							<div className='post-info'>
-								<h4>{props.post.description}</h4>
-								<img src={props.post.fileURL} style={{maxWidth:'40vw'}} alt="" />
-								
-							</div>
-						</div>
-						
-						<div className="comment-icon-container">
-                            <div className='icons'>
-								{(isLoggedIn) && (<AiOutlineMessage onClick={popupComment}/>)}
-                                {/* <AiOutlineMessage onClick={popupComment}/> */}
-							    {isOpenComment && <CreateComment handleClose={popupComment} postId ={props.post._id} setComments={setComments}/>}
-                            </div>
-							<div className='comment-info'>
-                                {comments.map((comment) => (
-                                    <div className='comment-container' key={comment._id}>
-                                        <p className='post-comment-creator'>Comment created by: {comment.creator}</p>
-                                        <p>{comment.text}</p>
-                                    </div>
-                                ))}
-                            </div> 
-						</div>
+				<div className='vote-container'>
+					<div className='icons'>
+						<BsArrowUpSquareFill onClick={inc}/>
+						<p>{count}</p>
+						<BsArrowDownSquareFill onClick={dec}/>
 					</div>
+					<div className='post-info'>
+						<h4>{props.post.description}</h4>
+						<img src={props.post.fileURL} style={{maxWidth:'40vw'}} alt="" />
+								
+					</div>
+				</div>
+						
+				<div className="comment-icon-container">
+                    <div className='icons'>
+						{(isLoggedIn) && (<AiOutlineMessage onClick={popupComment}/>)}
+					    {isOpenComment && <CreateComment handleClose={popupComment} postId ={props.post._id} setComments={setComments}/>}
+                    </div>
+					<div className='comment-info'>
+                        {comments.map((comment) => (
+                            <div className='comment-container' key={comment._id}>
+                                <p className='post-comment-creator'>Comment created by: {comment.creator}</p>
+                                <p>{comment.text}</p>
+                            </div>
+                         ))}
+                    </div> 
+				</div>
+			</div>
 		</div>
 		)
 }

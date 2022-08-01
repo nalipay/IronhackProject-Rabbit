@@ -1,30 +1,23 @@
 
 import React, { useContext } from 'react'
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from 'axios'
 import { AuthContext } from '../context/auth'
-
 
 export default function Comment(props) {
     
     const [comment, setComment] = useState("")
     const { user } = useContext(AuthContext)
-    //const [comments, setComments] = useState([])
     const [errorMessage, setErrorMessage] = useState("")
-
 
     const handleSubmit = event => {
 		event.preventDefault()
 		const requestBody = { comment, creator:user.username }
-        //console.log(requestBody)
 		axios.post(`/api/posts/${props.postId}`, requestBody)
            
 			.then(response => {
-                //console.log(props.postId)
-           
                 props.handleClose()
                 props.setComments(response.data.comments)
-            
 			})
 			.catch(err => {
                 console.log(err)
@@ -34,7 +27,6 @@ export default function Comment(props) {
     }
 
     const handleComment = event => setComment(event.target.value)
-
 
 	return (
         <>
@@ -47,8 +39,6 @@ export default function Comment(props) {
                         <input className="comment-input" type="text" value={comment} onChange={handleComment} />
                         <br />
                         <button type="submit">Add new comment</button>
-                        {/* <p className='post-comment-creator'>Created by: {comment.creator}</p>
-                        <p>{post.comment}</p> */}
                     </form>
                     {errorMessage && <h5>{errorMessage}</h5>}
                 </div>

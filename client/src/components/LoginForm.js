@@ -3,16 +3,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../context/auth'
 
-
 export default function Login(props) {
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState(undefined);
 
-	const navigate = useNavigate()
-
 	const { storeToken, verifyStoredToken } = useContext(AuthContext)
+
+	const navigate = useNavigate()
 
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -20,7 +19,6 @@ export default function Login(props) {
 		axios.post('/api/auth/login', requestBody)
 			.then(response => {
 				const token = response.data.authToken
-				// store the token
 				storeToken(token)
 				verifyStoredToken()
 					.then(() => {

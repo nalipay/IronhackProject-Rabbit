@@ -6,9 +6,6 @@ import axios from 'axios'
 import Post from '../components/Post'
 import Searchbar from '../components/Searchbar'
 
-
-
-
 export default function Channel() {
 	
 	const params = useParams()
@@ -24,7 +21,6 @@ export default function Channel() {
 	function getAllPosts() {
 		axios.get(`/api/channel/${name}`)
 				.then(response => {
-					 //console.log('hallo',response.data)
 					setPosts(response.data.posts)
 				})
 			.catch(err => console.log(err))
@@ -33,7 +29,7 @@ export default function Channel() {
 			getAllPosts()
 		}, [name])
 
-		return (
+	return (
 		<div className='page-content'>
 			<Searchbar />
 			<div className='channel-heading'>
@@ -46,7 +42,6 @@ export default function Channel() {
 					<Post post={post} key={post._id} getAllPosts={getAllPosts} />
 				))}
 			</div>
-		</div>
-			
+		</div>	
 		)
 	}

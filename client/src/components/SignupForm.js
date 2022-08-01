@@ -15,7 +15,6 @@ export default function Signup(props) {
 		const requestBody = { username, password, }
 		axios.post('/api/auth/signup', requestBody)
 			.then(response => {
-				//navigate('/login')
 				props.handleClose()
 				props.setIsOpenLogin(true)
 			})

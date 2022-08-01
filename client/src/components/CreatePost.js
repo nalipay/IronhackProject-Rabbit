@@ -4,52 +4,46 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/auth'
 
-
 export default function CreatePost(props) {
     const [title, setTitle] = useState("")
     const [fileURL, setFileURL] = useState("")
     const [description, setDescription] = useState()
     const [errorMessage, setErrorMessage] = useState("")
     const { user } = useContext(AuthContext)
-    // console.log(props.name)
 
     const navigate = useNavigate()
 
     const handleFileUpload = e => {
      
         const uploadData = new FormData();
-     
         uploadData.append("fileURL", e.target.files[0]);
      
         axios
           .post('/api/upload', uploadData)
           .then(response => {
-           //console.log(response)
             setFileURL(response.data.secure_url);
         
           })
           .catch(err => console.log("Error while uploading the file: ", err));
       };
 
-
     const handleSubmit = event => {
 		event.preventDefault()
 		const requestBody = { title, fileURL, description, creator: user.username, channel: props.name }
-        //console.log(requestBody)
-		axios.post('/api/posts', requestBody)
+
+        axios.post('/api/posts', requestBody)
 			.then(response => {
                 props.handleClose()
                 props.setPosts([...props.posts, response.data])
-				//console.log(response.data)
 			})
 			.catch(err => {
 				const errorDescription = err.response.data.message
 				setErrorMessage(errorDescription)
 			})
-    
     }
 
     const handleTitle = event => setTitle(event.target.value)
+
 	return (
         <>
             <div className="popup-box">

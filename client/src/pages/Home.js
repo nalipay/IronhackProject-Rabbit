@@ -11,32 +11,30 @@ export default function Home() {
 const [posts, setPosts] = useState([])
 const { isLoggedIn, user} = useContext(AuthContext);
 
-
 function getAllPosts() {
 	axios.get(`/api/posts`)
 			.then(response => {
-				 //console.log('hallo',response.data)
 				setPosts(response.data)
 			})
 		.catch(err => console.log(err))
 }
+
 	useEffect(() => {
 		getAllPosts()
 	}, [])
 
-	return (
+return (
+		<div>
 			<div>
-				<div>
-				<Searchbar />
-				{(isLoggedIn) && (<h2 className='channel-heading'>Welcome {user.username}</h2>)}
-				{posts.sort((a, b) => {
-					return b.votes - a.votes }).map((post) => (
-						<div key={post._id}>
-							<Post post={post} getAllPosts={getAllPosts}/>
-						</div>
-						
-					))
-				}
+			<Searchbar />
+			{(isLoggedIn) && (<h2 className='channel-heading'>Welcome {user.username}</h2>)}
+			{posts.sort((a, b) => {
+				return b.votes - a.votes }).map((post) => (
+					<div key={post._id}>
+						<Post post={post} getAllPosts={getAllPosts}/>
+					</div>			
+				))
+			}
 			</div>
 		</div>
 	)

@@ -18,7 +18,6 @@ router.post('/signup', (req, res, next) => {
 
     User.findOne({ username })
     .then(foundUser => {
-        // if the user already exists send an error
         if (foundUser) {
             res.status(400).json({ message: 'Username already exists' })
             return
@@ -26,7 +25,6 @@ router.post('/signup', (req, res, next) => {
 
         const salt = bcrypt.genSaltSync();
 			const hashedPassword = bcrypt.hashSync(password, salt)
-			// create the new user
 
 			return User.create({ username, password: hashedPassword })
 				.then(createdUser => {
@@ -57,7 +55,6 @@ router.post('/login', (req, res, next) => {
 			if (passwordCorrect) {
 				const { _id, username } = foundUser
 				const payload = { _id, username }
-				// create the json web token
 				const authToken = jwt.sign(
 					payload,
 					process.env.JWT_SECRET,
@@ -75,8 +72,6 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/verify', isAuthenticated, (req, res, next) => {
-	// if the token is valid we can access it on : req.payload
-	console.log('request payload is: ', req.payload)
 	res.status(200).json(req.payload)
 });
 
